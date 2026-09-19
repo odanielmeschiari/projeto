@@ -12,6 +12,11 @@ struct HORARIO{
 	int ss;
 };
 
+// funcao auxiliar que calcula o tempo absoluto
+int tempo_abs(horario *horario){
+	return horario->hh*3600 + horario->mm*60 + horario->ss; 
+}
+
 // funcao que cria um horario
 horario *horario_criar(int hh, int mm, int ss){
 	if (hh < 0 || mm < 0 || ss < 0) return NULL;
