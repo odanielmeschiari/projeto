@@ -7,6 +7,8 @@
 
 typedef struct HORARIO horario;
 
+// funcao auxiliar que calcula o tempo absoluto
+int tempo_abs(horario *horario)
 // funcao que cria um horario
 horario *horario_criar(int hh, int mm, int ss);
 // funcao que apaga um horario
