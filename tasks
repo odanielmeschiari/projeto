@@ -1,0 +1,53 @@
+VERSÃO 1
+Tasks
+[ ] TAD célula
+criar celula
+apagar
+change prioridade
+change horario
+gets
+
+[ ] TAD lista
+ordenacao por tempo
+criar lista
+apagar
+ordenar_criterio por merge sort
+change - busca binaria + celula
+inserir
+executar (mostra e remove)
+next (so mostra)
+imprimir
+
+[ ] main()
+interface do usuario
+input output
+switch de chamadas
+
+[A] documentação
+
+-------------------------------------------
+
+1. inserção ordenada por tempo
+- para inserir: O(n)
+- para remover por tempo: O(1)
+- para remover por prioridade: O(n)
+- para imprimir por prioridade: O(n logn)
+- para imprimir por tempo: O(n)
+- next tempo: O(1)
+- next prioridade: O(n)
+
+2. inserção desordenada
+- para inserir: O(1)
+    se o novo elemento entra na posicao certa, permance ordenada
+- para remover por tempo: O(n)
+    se a lista ja estiver ordenada por tempo: O(1)
+- para remover por prioridade: O(n)
+    se a lista ... O(1)
+- para imprimir por prioridade: O(n logn)
+    se a lista ... O(n)
+- para imprimir por tempo: O(n logn)
+    se a lista ... O(n)
+- next tempo: O(n)
+    se a lista ... O(1)
+- next prioridade: O(n)
+    se a lista ... O(1)
