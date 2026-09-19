@@ -12,7 +12,7 @@ horario *horario_criar(int hh, int mm, int ss);
 // funcao que apaga um horario
 void horario_apagar(horario **x);
 // funcao que muda um horario dado
-bool horario_change(horario *anterior, horario *novo);
+bool horario_change(horario *anterior, horario **novo);
 // funcao que imprime um horario
 void horario_imprimir(horario *x);
 
