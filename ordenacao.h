@@ -3,11 +3,9 @@
 #ifndef ORDENACAO_H
 #define ORDENACAO_H
 
-// nota: esta TAD ordena apenas vetores de inteiros. adaptar a main() para isso
+#include "lista.h"
 
-// ordenação para poucos elementos
-void insertion_sort(int n, int *vet);
-// ordenação para muitos elementos
-void merge_sort(int n, int *vet);
+// função que ordena uma lista
+void ordenar(int tam, LISTA *lista, char criterio);
 
 #endif
