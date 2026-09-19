@@ -5,6 +5,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// funcao insertion sort para ordenar poucos elementos
+void insertion_sort(int n, int *vet){
+	// colocar cada termo, a partir do segundo, na posicao correta
+	for (int i = 1; i<n; i++){
+		int j = i-1;
+		int atual = vet[i];
+		while ((j >= 0) && (atual < vet[j])){
+			vet[j+1] = vet[j];
+			j--;
+		}
+		vet[j+1] = atual;
+	}
+	return;
+}
+
 // função auxiliar para o merge sort: não incluída na interface
 void intercala(int esq, int dir, int *vet_esq, int *vet_dir, int n, int *vet){
 	int aux_esq = 0;
