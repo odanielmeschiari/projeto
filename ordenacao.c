@@ -67,7 +67,7 @@ void merge_sort(int n, int *vet){
 	}
 	// dividir o vetor
 	// esquerda
-	int esq = n/2+1;
+	int esq = n/2;
 	int vet_esq[esq]; // 0 1 2 3 4 -> meio = 2, elemento meio = 2, quantidade esq = 3 (n/2+1), quantidade dir = 2 (n-esq)
 	for (int i = 0; i<esq; i++){
 		vet_esq[i] = vet[i];
