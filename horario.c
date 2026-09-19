@@ -32,18 +32,19 @@ void horario_apagar(horario **x){
 }
 
 // funcao que muda um horario dado
-bool horario_change(horario *anterior, horario *novo){
+bool horario_change(horario *anterior, horario **novo){
 	if (anterior == NULL || novo == NULL || anterior == novo) return false;
 	anterior->hh = novo->hh;
 	anterior->mm = novo->mm;
 	anterior->ss = novo->ss;
-	horario_apagar(&anterior);
+	free(*novo);
+	(*novo) = NULL;
 	return true;
 }
 
 // funcao que imprime um horario
 void horario_imprimir(horario *x){
 	if (x == NULL) return;
-	printf("%d:%d:%d",x->hh,x->mm,x->ss);
+	printf("%02d:%02d:%02d",x->hh,x->mm,x->ss);
 	return;
 }
