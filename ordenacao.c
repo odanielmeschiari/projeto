@@ -3,19 +3,20 @@
 #include "lista.h"
 #include "ordenacao.h"
 #include "horario.h"
+#include "celula.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
 // funcao insertion sort para ordenar poucos elementos
-void insertion_sort(int n, celula *vet, char criterio){
+void insertion_sort(int n, celula **vet, char criterio){
 	if (criterio == 'p'){
 		// colocar cada termo, a partir do segundo, na posicao correta
 		for (int i = 1; i<n; i++){
 			int j = i-1;
-			celula temp = vet[i];
-			int atual = temp->prior;
-			while ((j >= 0) && (atual > vet[j]->prior)){
+			celula *temp = vet[i];
+			int atual = celula_get_prior(temp);
+			while ((j >= 0) && (atual > celula_get_prior(vet[j]))){
 				vet[j+1] = vet[j];
 				j--;
 			}
@@ -26,9 +27,9 @@ void insertion_sort(int n, celula *vet, char criterio){
 	// colocar cada termo, a partir do segundo, na posicao correta
 		for (int i = 1; i<n; i++){
 			int j = i-1;
-			celula temp = vet[i];
-			int atual = tempo_abs(temp->horario);
-			while ((j >= 0) && (atual < tempo_abs(vet[j]->horario))){
+			celula *temp = vet[i];
+			int atual = tempo_abs(celula_get_horario(temp));
+			while ((j >= 0) && (atual < tempo_abs(celula_get_horario(vet[j])))){
 				vet[j+1] = vet[j];
 				j--;
 			}
@@ -39,7 +40,7 @@ void insertion_sort(int n, celula *vet, char criterio){
 }
 
 // função auxiliar para o merge sort: não incluída na interface
-void intercala(int esq, int dir, celula *vet_esq, celula *vet_dir, int n, celula *vet, char criterio){
+void intercala(int esq, int dir, celula **vet_esq, celula **vet_dir, int n, celula **vet, char criterio){
 	if (criterio == 'p'){
 		int aux_esq = 0;
 		int aux_dir = 0;
@@ -58,11 +59,11 @@ void intercala(int esq, int dir, celula *vet_esq, celula *vet_dir, int n, celula
 				break;
 			}
 			// cada elemento deve receber o menor de ambos
-			if (vet_esq[aux_esq]->prior >= vet_dir[aux_dir]->prior){
+			if (celula_get_prior(vet_esq[aux_esq]) >= celula_get_prior(vet_dir[aux_dir])){
 				vet[i] = vet_esq[aux_esq];
 				aux_esq++;
 			}
-			else if (vet_esq[aux_esq]->prior < vet_dir[aux_dir]->prior){
+			else if (celula_get_prior(vet_esq[aux_esq]) < celula_get_prior(vet_dir[aux_dir])){
 				vet[i] = vet_dir[aux_dir];
 				aux_dir++;
 			}
@@ -87,11 +88,11 @@ void intercala(int esq, int dir, celula *vet_esq, celula *vet_dir, int n, celula
 				break;
 			}
 			// cada elemento deve receber o menor de ambos
-			if (tempo_abs(vet_esq[aux_esq]->horario) <= tempo_abs(vet_dir[aux_dir]->horario)){
+			if (tempo_abs(celula_get_horario(vet_esq[aux_esq])) <= tempo_abs(celula_get_horario(vet_dir[aux_dir]))){
 				vet[i] = vet_esq[aux_esq];
 				aux_esq++;
 			}
-			else if (tempo_abs(vet_esq[aux_esq]->horario) > tempo_abs(vet_dir[aux_dir]->horario)){
+			else if (tempo_abs(celula_get_horario(vet_esq[aux_esq])) > tempo_abs(celula_get_horario(vet_dir[aux_dir]))){
 				vet[i] = vet_dir[aux_dir];
 				aux_dir++;
 			}
@@ -101,49 +102,27 @@ void intercala(int esq, int dir, celula *vet_esq, celula *vet_dir, int n, celula
 }
 
 // funcao merge sort para ordenar muitos elementos
-void merge_sort(int n, celula *vet, char criterio){
+void merge_sort(int n, celula **vet, char criterio){
 	// caso base: acabaram os termos
 	if (n <= 1) return;
-	if (criterio == 'p'){
-		// dividir o vetor
-		// esquerda
-		int esq = n/2;
-		celula vet_esq[esq]; // 0 1 2 3 4 -> meio = 2, elemento meio = 2, quantidade esq = 3 (n/2+1), quantidade dir = 2 (n-esq)
-		for (int i = 0; i<esq; i++){
-			vet_esq[i] = vet[i];
-		}
-		// direita
-		int dir = n-esq;
-		celula vet_dir[dir];
-		for (int i = 0; i<dir; i++){
-			vet_dir[i] = vet[esq+i];
-		}
-		// chamadas recursivas
-		merge_sort(esq,vet_esq,criterio);
-		merge_sort(dir,vet_dir,criterio);
-		// por fim, intercalar ambos os vetores
-		intercala(esq,dir,vet_esq,vet_dir,n,vet,criterio);
+	// dividir o vetor
+	// esquerda
+	int esq = n/2;
+	celula *vet_esq[esq]; // 0 1 2 3 4 -> meio = 2, elemento meio = 2, quantidade esq = 3 (n/2+1), quantidade dir = 2 (n-esq)
+	for (int i = 0; i<esq; i++){
+		vet_esq[i] = vet[i];
 	}
-	else{
-		// dividir o vetor
-		// esquerda
-		int esq = n/2;
-		celula vet_esq[esq]; // 0 1 2 3 4 -> meio = 2, elemento meio = 2, quantidade esq = 3 (n/2+1), quantidade dir = 2 (n-esq)
-		for (int i = 0; i<esq; i++){
-			vet_esq[i] = vet[i];
-		}
-		// direita
-		int dir = n-esq;
-		celula vet_dir[dir];
-		for (int i = 0; i<dir; i++){
-			vet_dir[i] = vet[esq+i];
-		}
-		// chamadas recursivas
-		merge_sort(esq,vet_esq,criterio);
-		merge_sort(dir,vet_dir,criterio);
-		// por fim, intercalar ambos os vetores
-		intercala(esq,dir,vet_esq,vet_dir,n,vet,criterio);
+	// direita
+	int dir = n-esq;
+	celula *vet_dir[dir];
+	for (int i = 0; i<dir; i++){
+		vet_dir[i] = vet[esq+i];
 	}
+	// chamadas recursivas
+	merge_sort(esq,vet_esq,criterio);
+	merge_sort(dir,vet_dir,criterio);
+	// por fim, intercalar ambos os vetores
+	intercala(esq,dir,vet_esq,vet_dir,n,vet,criterio);
 	return;
 }
 
