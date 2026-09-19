@@ -4,7 +4,7 @@
 #include "horario.h"
 
 #include <stdlib.h>
-#include <stdbool.h>
+#include <stdio.h>
 #include <stdbool.h>
 
 #define MAX_DESCR 50
@@ -21,8 +21,12 @@ celula *criar_celula(int prior, horario *horario, char *descricao){
 	if (x == NULL)
 		return NULL;
 	x->prior = prior;
-	celula->chegada = horario;
-	celula->descricao = descricao;
+	x->chegada = horario;
+	int i;
+	for (i = 0; descricao[i] != '\0'; i++){
+		x->descricao[i] = descricao[i];
+	}
+	x->descricao[i] = '\0';
 	return x;
 }
 
@@ -30,7 +34,7 @@ celula *criar_celula(int prior, horario *horario, char *descricao){
 void apagar_celula(celula **x){
 	if (x == NULL || *x == NULL)
 		return;
-	horario_apagar(horario *x->chegada);
+	horario_apagar(&((*x)->chegada));
 	free(*x);
 	*x = NULL;
 	return;
@@ -52,6 +56,6 @@ void imprimir_celula(celula *x){
 	if (x == NULL) return;
 	printf("%d ",x->prior);
 	horario_imprimir(x->chegada);
-	printf("%s\n",x->descricao);
+	printf(" %s\n",x->descricao);
 	return;
 }
