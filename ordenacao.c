@@ -1,6 +1,5 @@
 // implementação das funções de ordenação
 
-#include "lista.h"
 #include "ordenacao.h"
 #include "horario.h"
 #include "celula.h"
@@ -127,7 +126,7 @@ void merge_sort(int n, celula **vet, char criterio){
 }
 
 // função que ordena uma lista
-void ordenar(int tam, LISTA *lista, char criterio){
+void ordenar(int tam, celula **celulas, char criterio, int ordenacao_atual){
 	int novo_criterio;
 	switch(criterio){
 		case 'p': novo_criterio = 1;
@@ -138,14 +137,13 @@ void ordenar(int tam, LISTA *lista, char criterio){
 			break;
 	}
 	// caso já esteja ordenada segundo o criterio, basta continuar
-	if (novo_criterio == lista->ordenacao){
+	if (novo_criterio == ordenacao_atual){
 		return;
 	}
 	if (tam <= 25){
-		insertion_sort(tam,lista->celulas,criterio);
+		insertion_sort(tam,celulas,criterio);
 	}
 	else
-		merge_sort(tam,lista->celulas,criterio);
-	lista->ordenacao = novo_criterio;
+		merge_sort(tam,celulas,criterio);
 	return;
 }
