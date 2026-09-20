@@ -3,9 +3,10 @@
 #ifndef ORDENACAO_H
 #define ORDENACAO_H
 
-#include "lista.h"
+#include "celula.h"
+#include "horario.h"
 
 // função que ordena uma lista
-void ordenar(int tam, LISTA *lista, char criterio);
+void ordenar(int tam, celula **celulas, char criterio, int ordenacao_atual);
 
 #endif
