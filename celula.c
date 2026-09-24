@@ -45,10 +45,24 @@ int celula_get_prior(celula *x){
 	return x->prior;
 }
 
+// função que muda uma prioridade
+void celula_set_prior(celula *x, int nova){
+	if (x == NULL) return;
+	x->prior = nova;
+	return;
+}
+
 // funcao get horario
 horario *celula_get_horario(celula *x){
 	if (x == NULL) return NULL;
 	return x->chegada;
+}
+
+// função que muda um horário
+void celula_set_horario(celula *x, horario *novo){
+	if (x == NULL || novo == NULL) return;
+	horario_change(x->chegada,&novo);
+	return;
 }
 
 // funcao imprimir celula
