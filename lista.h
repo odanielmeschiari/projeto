@@ -18,14 +18,18 @@ void lista_apagar(LISTA **lista);
 // essa funcao insere um elemento no final da lista
 bool lista_inserir(LISTA *lista, celula *item);
 // essa funcao remove o primeiro item da lista segundo um critério
-celula *lista_remover(LISTA *lista, int criterio);
+celula *lista_remover(LISTA *lista);
 // essa funcao mostra o próximo processo da lista sem remover
-celula *lista_proximo(LISTA *lista, int criterio);
-// essa funcao muda um campo "horario" de uma celula
-bool lista_change_horario(LISTA *lista, horario *anterior, horario *novo);
-// essa funcao muda um campo "prior" de uma celula
-bool lista_change_prior(LISTA *lista, int prior_anterior, int prior_novo);
+celula *lista_proximo(LISTA *lista);
 // essa funcao imprime a lista segundo um criterio
-void imprimir_lista(LISTA *lista, int criterio);
+void imprimir_lista(LISTA *lista);
+// essa funcao retorna a ordenacao atual da lista
+int lista_get_ordem(LISTA *lista);
+// essa funcao muda a ordem da lista
+bool lista_set_ordem(LISTA *lista, int ordem);
+// essa funcao retorna o tamanho atual da lista
+int lista_tam(LISTA *lista);
+// essa funcao retorna um ponteiro para as celulas da lista
+celula **lista_celulas(LISTA *lista);
 
 #endif
