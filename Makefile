@@ -3,7 +3,7 @@ CC = gcc
 
 all: programa
 
-programa:
+programa: main.o lista.o ordenacao.o celula.o horario.o
 	$(CC) main.o lista.o ordenacao.o celula.o horario.o $(FLAGS) -o programa
 
 horario.o: horario.c horario.h
