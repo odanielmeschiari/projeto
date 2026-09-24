@@ -38,10 +38,10 @@ void horario_apagar(horario **x){
 
 // funcao que muda um horario dado
 bool horario_change(horario *anterior, horario **novo){
-	if (anterior == NULL || novo == NULL || anterior == novo) return false;
-	anterior->hh = novo->hh;
-	anterior->mm = novo->mm;
-	anterior->ss = novo->ss;
+	if (anterior == NULL || novo == NULL || *novo == NULL || anterior == (*novo)) return false;
+	anterior->hh = (*novo)->hh;
+	anterior->mm = (*novo)->mm;
+	anterior->ss = (*novo)->ss;
 	free(*novo);
 	(*novo) = NULL;
 	return true;
