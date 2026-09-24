@@ -8,8 +8,8 @@
 #include <stdlib.h>
 
 // funcao insertion sort para ordenar poucos elementos
-void insertion_sort(int n, celula **vet, char criterio){
-	if (criterio == 'p'){
+void insertion_sort(int n, celula **vet, int criterio){
+	if (criterio == 2){ // prioridade
 		// colocar cada termo, a partir do segundo, na posicao correta
 		for (int i = 1; i<n; i++){
 			int j = i-1;
@@ -22,7 +22,7 @@ void insertion_sort(int n, celula **vet, char criterio){
 			vet[j+1] = temp;
 		}
 	}
-	else{
+	else{ // tempo
 	// colocar cada termo, a partir do segundo, na posicao correta
 		for (int i = 1; i<n; i++){
 			int j = i-1;
@@ -39,8 +39,8 @@ void insertion_sort(int n, celula **vet, char criterio){
 }
 
 // função auxiliar para o merge sort: não incluída na interface
-void intercala(int esq, int dir, celula **vet_esq, celula **vet_dir, int n, celula **vet, char criterio){
-	if (criterio == 'p'){
+void intercala(int esq, int dir, celula **vet_esq, celula **vet_dir, int n, celula **vet, int criterio){
+	if (criterio == 2){ // prioridade
 		int aux_esq = 0;
 		int aux_dir = 0;
 		for (int i = 0; i<n; i++){
@@ -69,7 +69,7 @@ void intercala(int esq, int dir, celula **vet_esq, celula **vet_dir, int n, celu
 		}
 		return;
 	}
-	else{
+	else{ // tempo
 		int aux_esq = 0;
 		int aux_dir = 0;
 		for (int i = 0; i<n; i++){
@@ -101,7 +101,7 @@ void intercala(int esq, int dir, celula **vet_esq, celula **vet_dir, int n, celu
 }
 
 // funcao merge sort para ordenar muitos elementos
-void merge_sort(int n, celula **vet, char criterio){
+void merge_sort(int n, celula **vet, int criterio){
 	// caso base: acabaram os termos
 	if (n <= 1) return;
 	// dividir o vetor
@@ -126,21 +126,8 @@ void merge_sort(int n, celula **vet, char criterio){
 }
 
 // função que ordena uma lista
-void ordenar(int tam, celula **celulas, char criterio, int ordenacao_atual){
-	int novo_criterio;
-	switch(criterio){
-		case 'p': novo_criterio = 1;
-			break;
-		case 't': novo_criterio = 2;
-			break;
-		default: printf("Erro\n"); return;
-			break;
-	}
-	// caso já esteja ordenada segundo o criterio, basta continuar
-	if (novo_criterio == ordenacao_atual){
-		return;
-	}
-	if (tam <= 25){
+void ordenar(int tam, celula **celulas, int criterio){
+	if (tam <= 10){
 		insertion_sort(tam,celulas,criterio);
 	}
 	else
