@@ -7,6 +7,6 @@
 #include "horario.h"
 
 // função que ordena uma lista
-void ordenar(int tam, celula **celulas, char criterio, int ordenacao_atual);
+void ordenar(int tam, celula **celulas, int criterio);
 
 #endif
